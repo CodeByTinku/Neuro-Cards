@@ -34,7 +34,7 @@
 
 ---
 ## 
-🚀 Demo You can try **Neuro-Cards** live here: [![Deploy with Vercel](https://vercel.com/button)](https://neuro-cards-weld.vercel.app/)
+🚀 Demo You can try **Neuro-Cards** live here: [![Deploy with Vercel](https://vercel.com/button)](https://neuro-cards-git-main-codebytinkus-projects.vercel.app/)
 
 ## 🚀 Getting Started
 
