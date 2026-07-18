@@ -19,7 +19,7 @@ const buildOptions = (card, allCards) => {
   return shuffle([card.answer, ...wrongs])
 }
 
-export default function StudyPage({ deck, onBack }) {
+export default function StudyPage({ deck, onBack, onStudyComplete }) {
   const [index, setIndex] = useState(0)
   const [flipped, setFlipped] = useState(false)
   const [selected, setSelected] = useState(null)   // which option user clicked
@@ -48,13 +48,19 @@ export default function StudyPage({ deck, onBack }) {
 
   const handleNext = () => {
     const isCorrect = selected === card.answer
-    if (isCorrect) setKnown(prev => [...prev, index])
-    else setUnknown(prev => [...prev, index])
+    const newKnown = isCorrect ? [...known, index] : known
+    const newUnknown = isCorrect ? unknown : [...unknown, index]
+    if (isCorrect) setKnown(newKnown)
+    else setUnknown(newUnknown)
 
     setSelected(null)
     setFlipped(false)
-    if (index + 1 >= total) setDone(true)
-    else setIndex(i => i + 1)
+    if (index + 1 >= total) {
+      onStudyComplete?.(deck.id, newKnown.length, total)
+      setDone(true)
+    } else {
+      setIndex(i => i + 1)
+    }
   }
 
   const restart = () => {
@@ -182,8 +188,18 @@ export default function StudyPage({ deck, onBack }) {
           </div>
           {flipped && (
             <div className="study-actions fade-up">
-              <button className="btn btn-red" onClick={() => { setUnknown(p => [...p, index]); setFlipped(false); if (index + 1 >= total) setDone(true); else setIndex(i => i + 1) }}>❌ Wrong</button>
-              <button className="btn btn-green" onClick={() => { setKnown(p => [...p, index]); setFlipped(false); if (index + 1 >= total) setDone(true); else setIndex(i => i + 1) }}>✅ Correct</button>
+              <button className="btn btn-red" onClick={() => {
+                const nU = [...unknown, index]
+                setUnknown(nU); setFlipped(false)
+                if (index + 1 >= total) { onStudyComplete?.(deck.id, known.length, total); setDone(true) }
+                else setIndex(i => i + 1)
+              }}>❌ Wrong</button>
+              <button className="btn btn-green" onClick={() => {
+                const nK = [...known, index]
+                setKnown(nK); setFlipped(false)
+                if (index + 1 >= total) { onStudyComplete?.(deck.id, nK.length, total); setDone(true) }
+                else setIndex(i => i + 1)
+              }}>✅ Correct</button>
             </div>
           )}
         </>

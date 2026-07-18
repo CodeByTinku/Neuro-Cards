@@ -3,6 +3,7 @@ import HomePage from './components/HomePage'
 import CreatePage from './components/CreatePage'
 import StudyPage from './components/StudyPage'
 import Toast from './components/Toast'
+import { loadStats, saveStudySession } from './utils/stats'
 
 export default function App() {
   const [view, setView] = useState('home') // 'home' | 'create' | 'study'
@@ -12,6 +13,7 @@ export default function App() {
   })
   const [activeDeck, setActiveDeck] = useState(null)
   const [toast, setToast] = useState(null)
+  const [stats, setStats] = useState(() => loadStats())
 
   useEffect(() => {
     localStorage.setItem('neurocards-decks', JSON.stringify(decks))
@@ -40,6 +42,16 @@ export default function App() {
     setView('study')
   }
 
+  // Called by StudyPage when session ends
+  const handleStudyComplete = (deckId, correct, total) => {
+    const updated = saveStudySession(deckId, correct, total)
+    setStats(updated)
+    const score = Math.round((correct / total) * 100)
+    if (score === 100) showToast('🏆 Perfect score! Streak updated!')
+    else if (score >= 80) showToast('🎉 Great job! Stats saved!')
+    else showToast('📊 Stats saved! Keep practicing!')
+  }
+
   return (
     <>
       <nav className="navbar">
@@ -55,6 +67,7 @@ export default function App() {
       {view === 'home' && (
         <HomePage
           decks={decks}
+          stats={stats}
           onStudy={studyDeck}
           onDelete={deleteDeck}
           onCreate={() => setView('create')}
@@ -71,6 +84,7 @@ export default function App() {
         <StudyPage
           deck={activeDeck}
           onBack={() => setView('home')}
+          onStudyComplete={handleStudyComplete}
         />
       )}
 
