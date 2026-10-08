@@ -86,9 +86,13 @@ export default function App() {
           onBack={() => setView('home')}
           onStudyComplete={handleStudyComplete}
         />
+        
       )}
+              
 
       {toast && <Toast message={toast} />}
+          
+
     </>
   )
 }

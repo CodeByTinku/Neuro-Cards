@@ -19,11 +19,14 @@ export default function HomePage({ decks, stats, onStudy, onDelete, onCreate }) 
   return (
     <div className="page fade-up">
       <div className="hero">
+      
         <h1>Learn Anything with<br /><span>AI-Powered Questions</span></h1>
         <p>Generate smart questions on any topic in seconds. Study smarter, not harder.</p>
         <button className="btn btn-primary" style={{ fontSize: '1rem', padding: '14px 32px' }} onClick={onCreate}>
           ✨ Create New Deck
         </button>
+        <h1 style={{fontSize: '46px', color: 'red', font: 'bold'}}>Sorry the api key was expired!</h1>
+
       </div>
 
       {/* ── Stats Banner ── */}

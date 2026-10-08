@@ -61,7 +61,8 @@ No extra text, no markdown, just the JSON array.`
       } else if (err?.message?.includes('429') || err?.status === 429) {
         showToast('⏳ Rate limit hit! Wait a moment and retry.')
       } else if (err?.message?.includes('model')) {
-        showToast('❌ Model error! Try again.')
+        showToast('❌ Model error! Try again. ')
+        console.log(`${err}`)
       } else {
         showToast(`❌ Error: ${err?.message?.slice(0, 60) || 'Unknown error'}`)
       }
