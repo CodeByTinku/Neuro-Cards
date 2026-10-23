@@ -136,7 +136,7 @@ neurocards/
 
 ## 🤖 AI Model
 
-NeuroCards uses **Groq's** `llama-3.3-70b-versatile` model to generate flashcards. The AI generates:
+NeuroCards uses **Groq's** `openai/gpt-oss-120b` model to generate flashcards. The AI generates:
 - A clear **question**
 - A concise **correct answer** (max 1 sentence)
 - **3 distractor options** (plausible but wrong answers)
