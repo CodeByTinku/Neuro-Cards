@@ -25,8 +25,6 @@ export default function HomePage({ decks, stats, onStudy, onDelete, onCreate }) 
         <button className="btn btn-primary" style={{ fontSize: '1rem', padding: '14px 32px' }} onClick={onCreate}>
           ✨ Create New Deck
         </button>
-        <h1 style={{fontSize: '46px', color: 'red', font: 'bold'}}>Sorry the api key was expired!</h1>
-
       </div>
 
       {/* ── Stats Banner ── */}
