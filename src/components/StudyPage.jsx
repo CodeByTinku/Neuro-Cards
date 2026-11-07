@@ -27,6 +27,7 @@ export default function StudyPage({ deck, onBack, onStudyComplete }) {
   const [known, setKnown] = useState([])
   const [unknown, setUnknown] = useState([])
   const [done, setDone] = useState(false)
+  const [showExplanation, setShowExplanation] = useState(false)
 
   const card = deck.cards[index]
   const total = deck.cards.length
@@ -44,6 +45,7 @@ export default function StudyPage({ deck, onBack, onStudyComplete }) {
     if (selected !== null) return // already answered
     setSelected(opt)
     setFlipped(true) // reveal state
+    setShowExplanation(true) // reveal AI explanation
   }
 
   const handleNext = () => {
@@ -55,6 +57,7 @@ export default function StudyPage({ deck, onBack, onStudyComplete }) {
 
     setSelected(null)
     setFlipped(false)
+    setShowExplanation(false) // hide explanation for next card
     if (index + 1 >= total) {
       onStudyComplete?.(deck.id, newKnown.length, total)
       setDone(true)
@@ -166,6 +169,15 @@ export default function StudyPage({ deck, onBack, onStudyComplete }) {
               <div className={`answer-feedback ${selected === card.answer ? 'feedback-correct' : 'feedback-wrong'}`}>
                 {selected === card.answer ? '🎉 Correct!' : `❌ Wrong! Correct: "${card.answer}"`}
               </div>
+
+              {/* AI Explanation */}
+              {showExplanation && card.explanation && (
+                <div className="explanation-box fade-up" style={{ marginTop: 14 }}>
+                  <div className="explanation-label">💡 Why?</div>
+                  <div className="explanation-text">{card.explanation}</div>
+                </div>
+              )}
+
               <button className="btn btn-primary" onClick={handleNext} style={{ marginTop: 16, width: '100%', justifyContent: 'center' }}>
                 {index + 1 < total ? 'Next Question →' : '🏆 See Results'}
               </button>

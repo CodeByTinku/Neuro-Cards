@@ -27,6 +27,7 @@ Rules:
 - question: clear and concise
 - answer: short (1 sentence max)
 - distractors: 3 plausible but WRONG answers, similar length to the correct answer
+- explanation: 1-2 sentences explaining why the correct answer is right and briefly why the distractors are wrong
 No extra text, no markdown, just the JSON array.`
         : `Create exactly ${cardCount} flashcards from this text:
 "${input.slice(0, 3000)}"
@@ -35,6 +36,7 @@ Return ONLY a JSON array like:
 Rules:
 - answer: short (1 sentence max)
 - distractors: 3 plausible but WRONG answers based on the text
+- explanation: 1-2 sentences explaining why the correct answer is right and briefly why the distractors are wrong
 No extra text, no markdown, just the JSON array.`
 
       const res = await client.chat.completions.create({
