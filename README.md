@@ -12,6 +12,7 @@
 ## ✨ Features
 
 - 🤖 **AI Question Generation** — Enter any topic or paste your notes, and the AI instantly generates MCQ flashcards
+- 💡 **AI Answer Explanations** — After every answer, get a short AI-generated explanation of why the correct answer is right and why the distractors are wrong
 - 📌 **Two Input Modes** — Generate by **Topic** or **Paste Text** (supports up to 3000 characters)
 - 🎯 **MCQ Study Mode** — 4-option multiple choice questions with instant right/wrong feedback
 - 🔄 **Flip Card Fallback** — Single-card decks use a classic flip-card experience
@@ -91,6 +92,7 @@ Open [http://localhost:5173](http://localhost:5173) in your browser.
 3. **Study Page**:
    - Answer each MCQ question by clicking one of the 4 options
    - See instant feedback after each answer
+   - **Read the AI explanation** ("💡 Why?") that appears below the feedback — it explains why the correct answer is right and why the distractors are wrong
    - Track your progress with the live progress bar
 4. **Results Screen** — View your final score, see how many you got right/wrong, and retry if needed
 5. **Stats & Streak** — After completing a session, your streak, best score, and accuracy automatically update
@@ -136,14 +138,18 @@ neurocards/
 
 ## 🤖 AI Model
 
-NeuroCards uses **Groq's** `openai/gpt-oss-120b` model to generate flashcards. The AI generates:
+NeuroCards uses **Groq's** `openai/gpt-oss-120b` model to generate flashcards. For each card, the AI generates:
 - A clear **question**
 - A concise **correct answer** (max 1 sentence)
 - **3 distractor options** (plausible but wrong answers)
+- A short **explanation** of why the correct answer is right and why the distractors are wrong
 
 ---
 
 ## 📅 Changelog
+
+### v1.2.0
+- 💡 Added **AI Answer Explanations** — each flashcard now includes an AI-generated explanation showing why the correct answer is right and why the distractors are wrong, displayed after every answer during study sessions
 
 ### v1.1.0
 - 🔥 Added **daily study streak** tracking with motivational badges (e.g., ⚡ Building Up!, 🔥 Hot Streak!)
