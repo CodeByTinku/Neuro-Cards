@@ -31,7 +31,7 @@
 |---|---|
 | **React 19** | UI framework |
 | **Vite 8** | Build tool & dev server |
-| **Groq SDK** | AI API client (`llama-3.3-70b-versatile`) |
+| **Groq SDK** | AI API client (`openai/gpt-oss-120b`) |
 | **Vanilla CSS** | Custom styling with CSS variables |
 | **localStorage** | Client-side data persistence (decks + stats) |
 
